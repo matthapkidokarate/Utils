@@ -1,22 +1,24 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.saunderstheaterproperties</groupId>
-  <artifactId>saunders-utils</artifactId>
-  <version>1.0.0.0</version>
-  <packaging>jar</packaging>
+	<groupId>com.saunderstheaterproperties</groupId>
+	<artifactId>saunders-utils</artifactId>
+	<version>1.0.0.0</version>
+	<packaging>jar</packaging>
 
-  <name>utils</name>
-  <url>http://maven.apache.org</url>
+	<name>utils</name>
+	<url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
-  </properties>
-  
-  <build>
-  <plugins>
-  			<!-- COMPILER -->
+	<properties>
+		<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<!-- COMPILER -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -26,6 +28,36 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-  </plugins>
-  </build>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>github</id>
+			<repositories>
+				<repository>
+					<id>central</id>
+					<url>https://repo1.maven.org/maven2</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>github</id>
+					<name>GitHub matthapkidokarate Apache Maven Packages</name>
+					<url>https://maven.pkg.github.com/matthapkidokarate/Utils</url>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub matthapkidokarate Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/matthapkidokarate/Utils</url>
+		</repository>
+	</distributionManagement>
 </project>
