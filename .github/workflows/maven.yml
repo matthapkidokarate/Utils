@@ -17,5 +17,5 @@ jobs:
       env:
         GITHUB_USERNAME: x-access-token
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run:
-          mvn --settings settings.xml COMPILE deploy
+      run:
+        mvn --settings settings.xml COMPILE deploy
