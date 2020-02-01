@@ -17,6 +17,7 @@
 	</properties>
 
 	<build>
+		<finalName>com.saunderstheaterproperties.utils</finalName>
 		<plugins>
 			<!-- COMPILER -->
 			<plugin>
