@@ -6,10 +6,10 @@
 
 	<groupId>com.saunderstheaterproperties</groupId>
 	<artifactId>saunders-utils</artifactId>
-	<version>1.0.0.0</version>
+	<version>1.0.0.2</version>
 	<packaging>jar</packaging>
 
-	<name>utils</name>
+	<name>saunders-utils</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -31,29 +31,8 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>github</id>
-			<repositories>
-				<repository>
-					<id>central</id>
-					<url>https://repo1.maven.org/maven2</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-				</repository>
-				<repository>
-					<id>github</id>
-					<name>GitHub matthapkidokarate Apache Maven Packages</name>
-					<url>https://maven.pkg.github.com/matthapkidokarate/Utils</url>
-				</repository>
-			</repositories>
-		</profile>
-	</profiles>
-
+	
+	
 	<distributionManagement>
 		<repository>
 			<id>github</id>
