@@ -29,6 +29,8 @@ public class GenericErrorDisplay {
 		FATAL, FATAL_RECOVER, RECOVER, ERROR_NO_RESPONSE
 	}
 	
+	private StackTraceElement[] ste;
+	
 	private Font font = new Font("Arial", Font.PLAIN, 20);
 	
 	private static volatile GenericErrorDisplay display;
@@ -58,22 +60,49 @@ public class GenericErrorDisplay {
 	 * @param shortText the title of the window
 	 * @param longText the content of the window
 	 * @param type the type of error, {@link GenericErrorDisplay.GenericErrorSettings}
+	 * @param ste The stack trace element, gained by using {@link Exception.getStackTrace()}
 	 * @return
 	 */
-	public static GenericErrorDisplay getGenericErrorDisplay(String shortText, String longText, GenericErrorSettings type) {
+	public static GenericErrorDisplay getGenericErrorDisplay(String shortText, String longText, GenericErrorSettings type, StackTraceElement[] ste) {
 		
 		if(display != null)
 			return display;
-		display = new GenericErrorDisplay(shortText, longText, type, new CountDownLatch(1));
+		display = new GenericErrorDisplay(shortText, longText, type, new CountDownLatch(1),ste);
 		return display;
 		
 	}
 	
-	public static GenericErrorDisplay getGenericErrorDisplay(String shortText, String longText, GenericErrorSettings type, CountDownLatch LATCH) {
+	/**
+	 * Creates a new GenericErrorDispla with the descriptions. use .LATCH.await() to wait for user to acknowledge
+	 * @param shortText the title of the window
+	 * @param longText the content of the window
+	 * @param type the type of error, {@link GenericErrorDisplay.GenericErrorSettings}
+	 * @param ste The stack trace element, gained by using {@link Exception.getStackTrace()}
+	 * @return
+	 */
+	public static GenericErrorDisplay getGenericErrorDisplay(String shortText, String longText, GenericErrorSettings type, Exception e) {
 		
 		if(display != null)
 			return display;
-		display = new GenericErrorDisplay(shortText, longText, type,LATCH);
+		display = new GenericErrorDisplay(shortText, longText, type, new CountDownLatch(1),e.getStackTrace());
+		return display;
+		
+	}
+	
+	/**
+	 * Creates a new GenericErrorDispla with the descriptions. use .LATCH.await() to wait for user to acknowledge
+	 * @param shortText the title of the window
+	 * @param longText the content of the window
+	 * @param type the type of error, {@link GenericErrorDisplay.GenericErrorSettings}
+	 * @param LATCH a countdown latch
+	 * @param ste The stack trace element, gained by using {@link Exception.getStackTrace()}
+	 * @return
+	 */
+	public static GenericErrorDisplay getGenericErrorDisplay(String shortText, String longText, GenericErrorSettings type, CountDownLatch LATCH, StackTraceElement[] ste) {
+		
+		if(display != null)
+			return display;
+		display = new GenericErrorDisplay(shortText, longText, type,LATCH,ste);
 		return display;
 		
 	}
@@ -82,15 +111,19 @@ public class GenericErrorDisplay {
 	
 	JPanel 	content, 
 			errorMessage,
-			buttonPanel;
+			buttonPanel,
+			tracePanel;
 
-	JLabel errorMessageLabel;
+	JLabel errorMessageLabel,
+			traceLabel;
 	
 	String shortMessage,longMessage;
 
 	JButton errorAckClose, errorIgnoreClose;
 	
-	private GenericErrorDisplay(String shortText, String longText, GenericErrorSettings type, CountDownLatch LATCH) {
+	private GenericErrorDisplay(String shortText, String longText, GenericErrorSettings type, CountDownLatch LATCH, StackTraceElement[] ste) {
+		
+		this.ste = ste;
 		
 		this.LATCH = LATCH;
 		
@@ -108,10 +141,12 @@ public class GenericErrorDisplay {
 		
 		// create all of the jpanels and add them to the JFrame
 		content = new JPanel();
+		tracePanel = new JPanel();
 		errorMessage = new JPanel();
 		buttonPanel = new JPanel();
 		content.add(errorMessage);
 		content.add(buttonPanel);
+		content.add(tracePanel);
 		mainApplicationFrame.add(content);
 		//content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
 
@@ -148,6 +183,9 @@ public class GenericErrorDisplay {
 			System.exit(-1);
 		}
 		
+		
+		traceLabel = new JLabel(StackTraceUtils.asHTML(this.ste));
+		tracePanel.add(traceLabel);
 
 		content.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 		content.setAlignmentY(JPanel.CENTER_ALIGNMENT);
