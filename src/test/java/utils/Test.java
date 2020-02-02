@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.saunderstheaterproperties.utils.GenericErrorDisplay;
+import com.saunderstheaterproperties.utils.errors.GenericErrorDisplay;
 import com.saunderstheaterproperties.utils.logging.LoggerSetup;
 
 public class Test {

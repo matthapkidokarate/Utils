@@ -1,4 +1,4 @@
-package com.saunderstheaterproperties.utils;
+package com.saunderstheaterproperties.utils.errors;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.saunderstheaterproperties.utils.AudioHandler;
 
 
 public class GenericErrorDisplay {
