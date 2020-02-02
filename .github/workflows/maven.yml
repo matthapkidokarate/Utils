@@ -1,6 +1,9 @@
 name: Deploy to Github registry
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
