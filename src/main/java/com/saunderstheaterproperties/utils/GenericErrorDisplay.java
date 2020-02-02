@@ -59,9 +59,13 @@ public class GenericErrorDisplay {
 			content.add(errorAckClose);
 			break;
 		case FATAL_RECOVER:
-			errorAckClose = new JButton(new ErrorClose("Close the application","This will close the application because the error is fatal"));
+			errorAckClose = new JButton(new ErrorClose("Close application","This will close the application because the error is fatal"));
 			errorIgnoreClose = new JButton(new ErrorContinue("Ignore Error", "Ignore the error. This may result in unexpected behavior as the error is fatal."));
+			break;
+		case RECOVER:
+			errorIgnoreClose = new JButton(new ErrorContinue("Ignore Error", "Ignore the error. There may be wierd"));
 		default:
+			// cause a crash
 			System.exit(-1);
 		}
 		
