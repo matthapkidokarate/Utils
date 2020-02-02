@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.saunderstheaterproperties.utils.GenericErrorDisplay;
 import com.saunderstheaterproperties.utils.logging.LoggerSetup;
 
 public class Test {
@@ -24,6 +25,8 @@ public class Test {
         LOGGER.warning("Info Log");
         LOGGER.info("Info Log");
         LOGGER.finest("Really not important");
+        
+        GenericErrorDisplay.getGenericErrorDisplay("Error", "I am a pissed off error", GenericErrorDisplay.GenericErrorSettings.RECOVER);
 
         // set the LogLevel to Info, severe, warning and info will be written
         // finest is still not written
