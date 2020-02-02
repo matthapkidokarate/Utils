@@ -1,6 +1,7 @@
 package com.saunderstheaterproperties.utils.errors;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.concurrent.CountDownLatch;
@@ -27,6 +28,8 @@ public class GenericErrorDisplay {
 	public enum GenericErrorSettings{
 		FATAL, FATAL_RECOVER, RECOVER, ERROR_NO_RESPONSE
 	}
+	
+	private Font font = new Font("Arial", Font.PLAIN, 20);
 	
 	private static volatile GenericErrorDisplay display;
 	
@@ -94,7 +97,7 @@ public class GenericErrorDisplay {
 		// open the JFrame object
 		mainApplicationFrame = new JFrame(shortText);
 		mainApplicationFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		mainApplicationFrame.setPreferredSize(new Dimension(1280,720));
+		mainApplicationFrame.setPreferredSize(new Dimension(720,720));
 		mainApplicationFrame.getContentPane().setLayout(new GridLayout());		
 		
 		// play the notification sound
@@ -110,6 +113,8 @@ public class GenericErrorDisplay {
 		content.add(errorMessage);
 		content.add(buttonPanel);
 		mainApplicationFrame.add(content);
+		//content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
+
 		
 		// create the message label and add
 		errorMessageLabel = new JLabel(longText);
@@ -119,16 +124,20 @@ public class GenericErrorDisplay {
 		switch(type) {
 		case FATAL:
 			errorAckClose = new JButton(new ErrorClose("Close the application","This will close the application because the error is fatal", shortText));
+			errorAckClose.setFont(font);
 			buttonPanel.add(errorAckClose);
 			break;
 		case FATAL_RECOVER:
 			errorAckClose = new JButton(new ErrorClose("Close application","This will close the application because the error is fatal", shortText));
 			errorIgnoreClose = new JButton(new ErrorContinue("Ignore Error", "Ignore the error. This may result in unexpected behavior as the error is fatal.", shortText));
+			errorAckClose.setFont(font);
+			errorIgnoreClose.setFont(font);
 			buttonPanel.add(errorAckClose);
 			buttonPanel.add(errorIgnoreClose);
 			break;
 		case RECOVER:
 			errorIgnoreClose = new JButton(new ErrorContinue("Ignore Error", "Ignore the error. There may be wierd things that happen", shortText));
+			errorIgnoreClose.setFont(font);
 			buttonPanel.add(errorIgnoreClose);
 			break;
 		case ERROR_NO_RESPONSE:
@@ -138,6 +147,13 @@ public class GenericErrorDisplay {
 			// cause a crash
 			System.exit(-1);
 		}
+		
+
+		content.setAlignmentX(JPanel.LEFT_ALIGNMENT);
+		content.setAlignmentY(JPanel.CENTER_ALIGNMENT);
+
+		errorMessage.setAlignmentX(JPanel.LEFT_ALIGNMENT);
+		errorMessage.setAlignmentY(JPanel.CENTER_ALIGNMENT);
 		
 		
 		mainApplicationFrame.pack();

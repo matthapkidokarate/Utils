@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.saunderstheaterproperties.utils.InternetTest;
 import com.saunderstheaterproperties.utils.errors.GenericErrorDisplay;
 import com.saunderstheaterproperties.utils.logging.LoggerSetup;
+import com.sun.tools.javac.util.Assert;
 
 public class Test {
 	
@@ -25,13 +27,9 @@ public class Test {
         LOGGER.warning("Info Log");
         LOGGER.info("Info Log");
         LOGGER.finest("Really not important");
-        
-        try {
-			GenericErrorDisplay.getGenericErrorDisplay("Error", "I am a pissed off error", GenericErrorDisplay.GenericErrorSettings.RECOVER).LATCH.await();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		};
 
+		InternetTest.performInternetTest();
+		
         // set the LogLevel to Info, severe, warning and info will be written
         // finest is still not written
         LOGGER.setLevel(Level.INFO);
