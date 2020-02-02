@@ -3,6 +3,7 @@ package com.saunderstheaterproperties.utils;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -11,12 +12,32 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 public class GenericErrorDisplay {
 
 	public enum GenericErrorSettings{
 		FATAL, FATAL_RECOVER, RECOVER, ERROR_NO_RESPONSE
 	}
 	
+	private static volatile GenericErrorDisplay display;
+	
+	public static GenericErrorDisplay getGenericErrorDisplay() throws NullPointerException{
+		
+		if(display != null)
+			return display;
+		
+		throw new NullPointerException("No Generic Error Display is available. Please create a new one.");
+		
+	}
+	
+	public static GenericErrorDisplay getGenericErrorDisplay(String shortText, String longText, GenericErrorSettings type) {
+		
+		if(display != null)
+			return display;
+		return new GenericErrorDisplay(shortText, longText, type);
+		
+	}
+		
 	JFrame mainApplicationFrame;
 	
 	JPanel 	content, 
@@ -63,12 +84,17 @@ public class GenericErrorDisplay {
 			errorIgnoreClose = new JButton(new ErrorContinue("Ignore Error", "Ignore the error. This may result in unexpected behavior as the error is fatal."));
 			break;
 		case RECOVER:
-			errorIgnoreClose = new JButton(new ErrorContinue("Ignore Error", "Ignore the error. There may be wierd"));
+			errorIgnoreClose = new JButton(new ErrorContinue("Ignore Error", "Ignore the error. There may be wierd things that happen"));
 		default:
 			// cause a crash
 			System.exit(-1);
 		}
 		
+		
+		mainApplicationFrame.pack();
+		
+		mainApplicationFrame.setAlwaysOnTop(true);
+		mainApplicationFrame.setVisible(true);
 		
 	}
 	
@@ -85,11 +111,21 @@ public class GenericErrorDisplay {
 			e.printStackTrace();
 		}
 	}
+	
+	public void finalize() {
+		
+		mainApplicationFrame.setVisible(false);
+		mainApplicationFrame.dispose();
+		System.gc();
+		
+	}
 
 }
 
 class ErrorContinue extends AbstractAction{
 
+	static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	
 	/**
 	 * 
 	 */
@@ -102,6 +138,9 @@ class ErrorContinue extends AbstractAction{
 	
 	public void actionPerformed(ActionEvent e) {
 		
+		LOGGER.severe("Closing error window. Log caused by: " + NAME);
+		
+		
 	}
 	
 }
@@ -112,6 +151,8 @@ class ErrorClose extends AbstractAction{
 	 * 
 	 */
 	private static final long serialVersionUID = 4408258707142790345L;
+	
+	static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 	public ErrorClose(String text, String description) {
 		super(text);
@@ -120,7 +161,7 @@ class ErrorClose extends AbstractAction{
 
 	
 	public void actionPerformed(ActionEvent e) {
-		
+		LOGGER.severe("Closing program because of " + NAME);
 		System.exit(1);
 		
 	}
