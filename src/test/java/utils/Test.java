@@ -5,9 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.saunderstheaterproperties.utils.InternetTest;
-import com.saunderstheaterproperties.utils.errors.GenericErrorDisplay;
 import com.saunderstheaterproperties.utils.logging.LoggerSetup;
-import com.sun.tools.javac.util.Assert;
 
 public class Test {
 	
