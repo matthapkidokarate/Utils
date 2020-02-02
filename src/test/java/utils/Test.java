@@ -26,7 +26,11 @@ public class Test {
         LOGGER.info("Info Log");
         LOGGER.finest("Really not important");
         
-        GenericErrorDisplay.getGenericErrorDisplay("Error", "I am a pissed off error", GenericErrorDisplay.GenericErrorSettings.RECOVER);
+        try {
+			GenericErrorDisplay.getGenericErrorDisplay("Error", "I am a pissed off error", GenericErrorDisplay.GenericErrorSettings.RECOVER).LATCH.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		};
 
         // set the LogLevel to Info, severe, warning and info will be written
         // finest is still not written
