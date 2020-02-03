@@ -80,7 +80,7 @@ public class GenericErrorDisplay {
 	 * @param ste The stack trace element, gained by using {@link Exception.getStackTrace()}
 	 * @return
 	 */
-	public static GenericErrorDisplay getGenericErrorDisplay(String shortText, String longText, GenericErrorSettings type, Exception e) {
+	public static GenericErrorDisplay getGenericErrorDisplay(String shortText, String longText, GenericErrorSettings type, Throwable e) {
 		
 		if(display != null)
 			return display;
