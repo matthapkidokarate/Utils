@@ -1,8 +1,9 @@
-C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\errors\GenericErrorDisplay.java
-C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\SerialExecutor.java
+C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\execution\SerialExecutor.java
+C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\displays\errors\GenericErrorDisplay.java
 C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\Time.java
 C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\logging\LoggingHTMLFormatter.java
-C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\InternetTest.java
-C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\AudioHandler.java
+C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\errors\StackTraceUtils.java
 C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\DummyClass.java
+C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\audio\AudioHandler.java
 C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\logging\LoggerSetup.java
+C:\Users\matth\Documents\New Eclipse Projects\Utils\utils\src\main\java\com\saunderstheaterproperties\utils\tests\InternetTest.java
