@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.saunderstheaterproperties.utils.InternetTest;
 import com.saunderstheaterproperties.utils.logging.LoggerSetup;
+import com.saunderstheaterproperties.utils.tests.InternetTest;
 
 public class Test {
 	

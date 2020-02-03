@@ -1,4 +1,4 @@
-package com.saunderstheaterproperties.utils.errors;
+package com.saunderstheaterproperties.utils.displays.errors;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,7 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.saunderstheaterproperties.utils.AudioHandler;
+import com.saunderstheaterproperties.utils.audio.AudioHandler;
+import com.saunderstheaterproperties.utils.errors.StackTraceUtils;
 
 
 public class GenericErrorDisplay {
@@ -84,7 +85,7 @@ public class GenericErrorDisplay {
 		
 		if(display != null)
 			return display;
-		display = new GenericErrorDisplay(shortText, longText, type, new CountDownLatch(1),e.getStackTrace());
+		display = new GenericErrorDisplay(shortText, longText, type, new CountDownLatch(1),StackTraceUtils.buildBetterStackTraceElementArray(e));
 		return display;
 		
 	}

@@ -1,4 +1,4 @@
-package com.saunderstheaterproperties.utils;
+package com.saunderstheaterproperties.utils.audio;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -6,6 +6,8 @@ import java.io.InputStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+
+import com.saunderstheaterproperties.utils.DummyClass;
 
 public class AudioHandler {
 
