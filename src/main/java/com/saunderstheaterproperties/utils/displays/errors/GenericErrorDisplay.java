@@ -27,7 +27,7 @@ public class GenericErrorDisplay {
 	 *
 	 */
 	public enum GenericErrorSettings{
-		FATAL, FATAL_RECOVER, RECOVER, ERROR_NO_RESPONSE
+		FATAL, FATAL_RECOVER, RECOVER, ERROR_NO_RESPONSE, SCREEN_COUNT_WARNING, SCREEN_ERROR
 	}
 	
 	private StackTraceElement[] ste;
@@ -72,6 +72,24 @@ public class GenericErrorDisplay {
 		return display;
 		
 	}
+	
+	/**
+	 * Creates a new GenericErrorDispla with the descriptions. use .LATCH.await() to wait for user to acknowledge
+	 * @param shortText the title of the window
+	 * @param longText the content of the window
+	 * @param type the type of error, {@link GenericErrorDisplay.GenericErrorSettings}
+	 * @param ste The stack trace element, gained by using {@link Exception.getStackTrace()}
+	 * @return
+	 */
+	public static GenericErrorDisplay getGenericErrorDisplay(String shortText, String longText, GenericErrorSettings type) {
+		
+		if(display != null)
+			return display;
+		display = new GenericErrorDisplay(shortText, longText, type, new CountDownLatch(1),null);
+		return display;
+		
+	}
+	
 	
 	/**
 	 * Creates a new GenericErrorDispla with the descriptions. use .LATCH.await() to wait for user to acknowledge
@@ -151,6 +169,10 @@ public class GenericErrorDisplay {
 		mainApplicationFrame.add(content);
 		//content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
 
+		if(this.ste != null) {
+			traceLabel = new JLabel(StackTraceUtils.asHTML(this.ste));
+			tracePanel.add(traceLabel);
+		}
 		
 		// create the message label and add
 		errorMessageLabel = new JLabel(longText);
@@ -176,6 +198,18 @@ public class GenericErrorDisplay {
 			errorIgnoreClose.setFont(font);
 			buttonPanel.add(errorIgnoreClose);
 			break;
+		case SCREEN_COUNT_WARNING:
+			errorIgnoreClose = new JButton(new ErrorContinue("Acknowledge", "Acknowledge the error", shortText));
+			errorIgnoreClose.setFont(font);
+			buttonPanel.add(errorIgnoreClose);
+			break;
+		case SCREEN_ERROR:
+			errorAckClose = new JButton(new ErrorClose("Close application","This will close the application because the error is fatal", shortText));
+			errorIgnoreClose = new JButton(new ErrorContinue("Ignore Error", "Ignore the error. This may result in unexpected behavior as the error is fatal.", shortText));
+			errorAckClose.setFont(font);
+			errorIgnoreClose.setFont(font);
+			buttonPanel.add(errorAckClose);
+			buttonPanel.add(errorIgnoreClose);
 		case ERROR_NO_RESPONSE:
 			System.exit(-1);
 			break;
@@ -183,10 +217,6 @@ public class GenericErrorDisplay {
 			// cause a crash
 			System.exit(-1);
 		}
-		
-		
-		traceLabel = new JLabel(StackTraceUtils.asHTML(this.ste));
-		tracePanel.add(traceLabel);
 
 		content.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 		content.setAlignmentY(JPanel.CENTER_ALIGNMENT);
