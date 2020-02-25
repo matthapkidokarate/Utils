@@ -6,7 +6,7 @@
 
 	<groupId>com.saunderstheaterproperties</groupId>
 	<artifactId>saunders-utils</artifactId>
-	<version>1.0.0.11</version>
+	<version>1.0.0.12</version>
 	<packaging>jar</packaging>
 
 	<name>saunders-utils</name>
